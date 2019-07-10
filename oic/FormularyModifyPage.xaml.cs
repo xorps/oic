@@ -20,9 +20,47 @@ namespace oic
     /// </summary>
     public partial class FormularyModifyPage : Page
     {
-        public FormularyModifyPage()
+        private readonly Formulary formulary;
+        private readonly FormularyItem formularyItem;
+        private readonly Barcodes barcodes;
+
+        public FormularyModifyPage(Formulary formulary, FormularyItem formularyItem, Barcodes barcodes)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            this.formulary = formulary;
+            this.formularyItem = formularyItem;
+            this.barcodes = barcodes;
+
+            var items = barcodes.AllFor(formularyItem.ID);
+
+            this.descriptionInput.Text = formularyItem.Description.ToString();
+            this.barcodesControl.ItemsSource = items;
+            this.barcodesLabel.Visibility = items.Any() ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void AddBarcode_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new AddBarcodePage(this.formulary, this.formularyItem, this.barcodes));
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new FormularyViewPage(this.formulary, this.barcodes));
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                var newItem = this.formulary.UpdateDescription(this.formularyItem, new FormularyDescription(this.descriptionInput.Text));
+                this.NavigationService.Navigate(new FormularyModifyPage(formulary, newItem, barcodes));
+            }
+            catch (FormularyDescription.InvalidException err)
+            {
+                MessageBox.Show(err.HelpText);
+            }
         }
     }
 }

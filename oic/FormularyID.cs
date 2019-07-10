@@ -8,7 +8,7 @@ namespace oic
 {
     public struct FormularyID
     {
-        private ulong id;
+        private readonly ulong id;
 
         public FormularyID(ulong id)
         {
@@ -28,6 +28,31 @@ namespace oic
         public override string ToString()
         {
             return id.ToString();
+        }
+
+        public int ToInt()
+        {
+            return Convert.ToInt32(id);
+        }
+
+        public static bool operator ==(FormularyID a, FormularyID b)
+        {
+            return a.id == b.id;
+        }
+
+        public static bool operator !=(FormularyID a, FormularyID b)
+        {
+            return a.id != b.id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new InvalidOperationException();
         }
     }
 }

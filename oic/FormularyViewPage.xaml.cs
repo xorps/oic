@@ -20,17 +20,21 @@ namespace oic
     /// </summary>
     public partial class FormularyViewPage : Page
     {
-        public FormularyViewPage(Formulary formulary)
+        private readonly Formulary formulary;
+        private readonly Barcodes barcodes;
+        public FormularyViewPage(Formulary formulary, Barcodes barcodes)
         {
             this.InitializeComponent();
 
+            this.formulary = formulary;
+            this.barcodes = barcodes;
             this.itemsControl.ItemsSource = formulary.All();
         }
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             var item = ((sender as Button).DataContext as FormularyItem);
-            MessageBox.Show("Modify Item " + item.Description);
+            this.NavigationService.Navigate(new FormularyModifyPage(this.formulary, item, this.barcodes));
         }
     }
 }

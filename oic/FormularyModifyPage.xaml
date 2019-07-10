@@ -10,18 +10,17 @@
 
     <StackPanel>
         <TextBlock Text="Description" />
-        <TextBox Text="{Binding Description}" />
-        <TextBlock Text="Barcodes" />
-        <ItemsControl>
+        <TextBox x:Name="descriptionInput" />
+        <Button Click="Save_Click" Content="Save Description" />
+        <TextBlock x:Name="barcodesLabel" Text="Barcodes" />
+        <ItemsControl x:Name="barcodesControl">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Barcode}" />
+                    <TextBlock Text="{Binding Data}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate> 
         </ItemsControl>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Save" />
-            <Button Content="Cancel" />
-        </StackPanel>
+        <Button Click="AddBarcode_Click" Content="Add Barcode" />
+        <Button Click="Cancel_Click" Content="Done" />
     </StackPanel>
 </Page>

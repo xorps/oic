@@ -71,7 +71,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddBarcodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FormularyAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormularyModifyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -87,10 +95,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddBarcodePage.xaml.cs">
+      <DependentUpon>AddBarcodePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Barcode.cs" />
+    <Compile Include="Barcodes.cs" />
     <Compile Include="Formulary.cs" />
     <Compile Include="FormularyAddPage.xaml.cs">
       <DependentUpon>FormularyAddPage.xaml</DependentUpon>
@@ -99,6 +112,9 @@
     <Compile Include="FormularyID.cs" />
     <Compile Include="FormularyItem.cs" />
     <Compile Include="FormularyItemInternal.cs" />
+    <Compile Include="FormularyModifyPage.xaml.cs">
+      <DependentUpon>FormularyModifyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormularyViewPage.xaml.cs">
       <DependentUpon>FormularyViewPage.xaml</DependentUpon>
     </Compile>

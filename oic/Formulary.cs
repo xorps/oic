@@ -8,7 +8,7 @@ namespace oic
 {
     public class Formulary
     {
-        private List<FormularyItemInternal> items = new List<FormularyItemInternal>();
+        private readonly List<FormularyItemInternal> items = new List<FormularyItemInternal>();
 
         public FormularyItem Add(FormularyDescription description)
         {
@@ -23,6 +23,13 @@ namespace oic
             {
                 yield return new FormularyItem(new FormularyID(i), items[i].Description);
             }
+        }
+
+        public FormularyItem UpdateDescription(FormularyItem item, FormularyDescription newDescription)
+        {
+            this.items[item.ID.ToInt()].Description = newDescription;
+
+            return new FormularyItem(item.ID, newDescription);
         }
     }
 }

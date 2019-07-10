@@ -21,6 +21,7 @@ namespace oic
     public partial class MainWindow : Window
     {
         private readonly Formulary formulary = new Formulary();
+        private readonly Barcodes barcodes = new Barcodes();
 
         public MainWindow()
         {
@@ -35,7 +36,7 @@ namespace oic
 
         private void MenuItem_FormularyViewClick(object sender, RoutedEventArgs e)
         {
-            this.frame.Navigate(new FormularyViewPage(formulary));
+            this.frame.Navigate(new FormularyViewPage(formulary, barcodes));
         }
     }
 }
