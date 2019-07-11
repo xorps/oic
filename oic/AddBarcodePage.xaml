@@ -7,12 +7,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddBarcodePage">
-    <StackPanel>
-        <TextBlock Text="Barcode Data" />
-        <TextBox x:Name="barcodeInput" />
-        <StackPanel Orientation="Horizontal">
-            <Button Click="Save_Click" Content="Save" />
-            <Button Click="Cancel_Click" Content="Cancel" />
+    <StackPanel MaxWidth="300">
+        <TextBlock Text="Scan or Enter Barcode" Margin="0,5,0,5" />
+        <TextBox x:Name="barcodeInput" Margin="0,5,0,5" />
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+            <Button Click="Save_Click" Content="Save" Margin="5,0,5,0" />
+            <Button Click="Cancel_Click" Content="Cancel" Margin="5,0,5,0"/>
         </StackPanel>
     </StackPanel>
 </Page>

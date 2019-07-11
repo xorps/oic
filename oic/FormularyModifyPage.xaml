@@ -8,11 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FormularyModifyPage">
 
-    <StackPanel>
-        <TextBlock Text="Description" />
-        <TextBox x:Name="descriptionInput" />
-        <Button Click="Save_Click" Content="Save Description" />
-        <TextBlock x:Name="barcodesLabel" Text="Barcodes" />
+    <StackPanel MaxWidth="300">
+        <TextBlock Text="Description" Margin="0,5,0,5"/>
+        <TextBox x:Name="descriptionInput" Margin="0,5,0,5"/>
+        <Button Click="Save_Click" Content="Save Description" Margin="0,5,0,5"/>
+        <TextBlock x:Name="barcodesLabel" Text="Barcodes" Margin="0,10,0,10"/>
         <ItemsControl x:Name="barcodesControl">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -20,7 +20,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate> 
         </ItemsControl>
-        <Button Click="AddBarcode_Click" Content="Add Barcode" />
-        <Button Click="Cancel_Click" Content="Done" />
+        <Button Click="AddBarcode_Click" Content="Add Barcode" Margin="0,5,0,5"/>
+        <Button Click="Cancel_Click" Content="Done" Margin="0,30,0,30"/>
     </StackPanel>
 </Page>

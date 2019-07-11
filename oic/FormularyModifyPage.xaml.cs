@@ -36,7 +36,7 @@ namespace oic
 
             descriptionInput.Text = formularyItem.Description.ToString();
             barcodesControl.ItemsSource = items;
-            barcodesLabel.Visibility = items.Any() ? Visibility.Visible : Visibility.Hidden;
+            barcodesLabel.Text = items.Any() ? "Barcodes" : "No Barcodes";
         }
 
         private void AddBarcode_Click(object sender, RoutedEventArgs e) => NavigationService.Navigate(new AddBarcodePage(formulary, formularyItem, barcodes));

@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FormularyViewPage">
-
+    <!--
     <StackPanel>
         <ItemsControl x:Name="itemsControl">
             <ItemsControl.ItemTemplate>
@@ -21,4 +21,20 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </StackPanel>
+    -->
+    <ListView x:Name="itemsControl">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Formulary ID" Width="100" DisplayMemberBinding="{Binding ID}" />
+                <GridViewColumn Header="Description" Width="500" DisplayMemberBinding="{Binding Description}" />
+                <GridViewColumn Header="Actions" Width="150">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ModifyButton_Click" Content="Edit" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView>
 </Page>
