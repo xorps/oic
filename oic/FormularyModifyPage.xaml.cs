@@ -34,33 +34,23 @@ namespace oic
 
             var items = barcodes.AllFor(formularyItem.ID);
 
-            this.descriptionInput.Text = formularyItem.Description.ToString();
-            this.barcodesControl.ItemsSource = items;
-            this.barcodesLabel.Visibility = items.Any() ? Visibility.Visible : Visibility.Hidden;
+            descriptionInput.Text = formularyItem.Description.ToString();
+            barcodesControl.ItemsSource = items;
+            barcodesLabel.Visibility = items.Any() ? Visibility.Visible : Visibility.Hidden;
         }
 
-        private void AddBarcode_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new AddBarcodePage(this.formulary, this.formularyItem, this.barcodes));
-        }
+        private void AddBarcode_Click(object sender, RoutedEventArgs e) => NavigationService.Navigate(new AddBarcodePage(formulary, formularyItem, barcodes));
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new FormularyViewPage(this.formulary, this.barcodes));
-        }
+        private void Cancel_Click(object sender, RoutedEventArgs e) => NavigationService.Navigate(new FormularyViewPage(formulary, barcodes));
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            try
+            FormularyDescription.Create(descriptionInput.Text).Foreach(Ok: description =>
             {
-
-                var newItem = this.formulary.UpdateDescription(this.formularyItem, new FormularyDescription(this.descriptionInput.Text));
-                this.NavigationService.Navigate(new FormularyModifyPage(formulary, newItem, barcodes));
-            }
-            catch (FormularyDescription.InvalidException err)
-            {
-                MessageBox.Show(err.HelpText);
-            }
+                var newItem = formulary.UpdateDescription(formularyItem, description);
+                NavigationService.Navigate(new FormularyModifyPage(formulary, newItem, barcodes));
+            },
+            Error: err => MessageBox.Show(err));
         }
     }
 }

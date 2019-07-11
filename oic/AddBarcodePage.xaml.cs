@@ -35,27 +35,21 @@ namespace oic
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            try
+            Barcode.Create(formularyItem, barcodeInput.Text).Foreach(Ok: barcode =>
             {
-                var data = this.barcodeInput.Text;
-                var barcode = new Barcode(formularyItem.ID, data);
-                this.barcodes.Add(barcode);
-                var _ = MessageBox.Show("Barcode added");
-                this.NavigationService.Navigate(new FormularyModifyPage(this.formulary, this.formularyItem, this.barcodes));
-            }
-            catch (Barcode.InvalidBarcodeException)
-            {
-                MessageBox.Show("Barcode is not valid");
-            }
-            catch (Barcodes.BarcodeInUseException)
-            {
-                MessageBox.Show("Barcode is in use & already associated with a formulary item");
-            }
+                barcodes.Add(barcode).Foreach(Ok: () =>
+                {
+                    var _ = MessageBox.Show("Barcode added");
+                    NavigationService.Navigate(new FormularyModifyPage(formulary, formularyItem, barcodes));
+                },
+                BarcodeInUse: () => MessageBox.Show("Barcode is in use"));
+            },
+            Error: () => MessageBox.Show("Barcode is invalid"));
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new FormularyModifyPage(this.formulary, this.formularyItem, this.barcodes));
+            NavigationService.Navigate(new FormularyModifyPage(formulary, formularyItem, barcodes));
         }
     }
 }

@@ -6,28 +6,17 @@ using System.Threading.Tasks;
 
 namespace oic
 {
+    using static Result<FormularyDescription, string>;
+
     public struct FormularyDescription
     {
         private readonly string description;
 
-        public class InvalidException : FormatException
-        {
-            public readonly string HelpText = "Description must be non-empty";
-        }
+        private FormularyDescription(string description) => this.description = description;
 
-        public FormularyDescription(string description)
-        {
-            if (string.IsNullOrEmpty(description) || string.IsNullOrWhiteSpace(description))
-            {
-                throw new InvalidException();
-            }
+        public override string ToString() => description;
 
-            this.description = description;
-        }
-
-        public override string ToString()
-        {
-            return description;
-        }
+        public static Result<FormularyDescription, string> Create(string description) =>
+            (string.IsNullOrEmpty(description) || string.IsNullOrWhiteSpace(description)) ? Error("Description must be non-empty") : Ok(new FormularyDescription(description));
     }
 }

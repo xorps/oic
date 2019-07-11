@@ -30,17 +30,13 @@ namespace oic
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            try
+            FormularyDescription.Create(descriptionInput.Text).Foreach(Ok: description =>
             {
-                var description = new FormularyDescription(this.descriptionInput.Text);
                 formulary.Add(description);
-                var result = MessageBox.Show(description + " Added to Formulary");
-                this.NavigationService.Navigate(new MainPage());
-            }
-            catch (FormularyDescription.InvalidException err)
-            {
-                MessageBox.Show(err.HelpText);
-            }
+                var _ = MessageBox.Show(description + " Added to Formulary");
+                NavigationService.Navigate(new MainPage());
+            },
+            Error: err => MessageBox.Show(err));
         }
     }
 }
